@@ -47,6 +47,12 @@ const Posts: React.FC = () => {
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4 text-center">All Posts</h1>
+      {isPending && <p className="text-center">Loading...</p>}
+      {error && (
+        <p className="text-red-500 text-center">
+          {error.message}
+        </p>
+      )}
       <ul className="space-y-2 ">
         {posts
           ?.slice()

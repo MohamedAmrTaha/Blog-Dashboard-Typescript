@@ -79,7 +79,14 @@ app.get("/dashboard", (req, res) => {
 });
 
 // Blog Post Routes (Protected)
-app.get("/posts", (req, res) => res.json(loadData().posts));
+app.get("/posts", (req, res) => {
+  const data = loadData();
+  // check if no posts
+  if (data.posts.length === 0) {
+    return res.status(404).json({ error: "No posts found" });
+  }
+  res.json(data.posts)
+});
 
 app.post("/new-post", (req, res) => {
   const { title, body } = req.body;
@@ -114,6 +121,9 @@ app.get("/user-posts", (req, res) => {
   const userPosts = data.posts.filter(
     (post) => post.authorId === req.user.id
   );
+  if (userPosts.length === 0)
+    return res.status(404).json({ error: "No posts found for this user" });
+
   res.json(userPosts);
 });
 

@@ -52,6 +52,7 @@ const Dashboard: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-md">
       <h2 className="text-2xl font-bold text-blue-600">Dashboard</h2>
+      
 
       {user ? (
         <div className="mt-4">
@@ -61,7 +62,7 @@ const Dashboard: React.FC = () => {
           <p className="text-gray-700">
             Email:{" "}
             <span className="font-semibold">
-              {user.email ?? "Not provided"}
+              {user.email}
             </span>
           </p>
         </div>
@@ -72,11 +73,8 @@ const Dashboard: React.FC = () => {
       <h3 className="text-xl font-semibold text-gray-800 mt-6">
         Your Blog Posts:
       </h3>
-
-      {isPending && <p className="text-gray-500">Loading posts...</p>}
-      {error && <p className="text-red-500">Failed to fetch posts.</p>}
-
-      {posts?.length > 0 ? (
+      
+      {posts?.length > 0 && !error ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
           {posts.map((post) => (
             <div key={post.id} className="bg-gray-100 p-4 rounded-lg shadow-md">

@@ -61,12 +61,17 @@ const PostDetails: React.FC = () => {
   } = useMutation({
     mutationFn: deletePost,
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["posts"],
-        refetchType: "none"
-      });
-      navigate("/posts");
-    },
+  // Prevent refetching the deleted post (avoids 404)
+  queryClient.invalidateQueries({ queryKey: ["userPosts"] });
+  queryClient.invalidateQueries({
+    queryKey: ["post", postId],
+    refetchType: "none"
+  });
+  // Refetch both lists so UI updates everywhere
+  queryClient.invalidateQueries({ queryKey: ["posts"] });
+
+  navigate("/posts");
+},
   });
 
   /**
@@ -84,7 +89,7 @@ const PostDetails: React.FC = () => {
   if (error)
     return (
       <p className="text-center text-red-500">
-        Error fetching post. Please try again.
+        {error.message}
       </p>
     );
 
