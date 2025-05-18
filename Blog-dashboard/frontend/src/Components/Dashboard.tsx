@@ -83,7 +83,7 @@ const Dashboard: React.FC = () => {
               <h3 className="text-lg font-semibold text-gray-800">
                 {post.title}
               </h3>
-              <p className="text-gray-600">{post.body.slice(0, 100)}...</p>
+              <p className="text-gray-600 break-words">{post.body}</p>
               <button
                 className="mt-2 px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 cursor-pointer"
                 onClick={() => navigate(`/posts/${post.id}`)}
