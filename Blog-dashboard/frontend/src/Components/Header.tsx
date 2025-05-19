@@ -17,9 +17,9 @@ const Header: React.FC = () => {
   
   // Get token from Redux store or fallback to localStorage
   let token = useSelector((state:RootState) => state.auth.token);
-  if (!token) {
-    token = localStorage.getItem("token");
-  }
+  // if (!token) {
+  //   token = localStorage.getItem("token");
+  // }
  
   /**
    * Handles user logout by dispatching the logout action.
