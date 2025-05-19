@@ -13,13 +13,14 @@ import PostDetailes from './Components/PostDetailes'
 import Dashboard from './Components/Dashboard'
 import { setToken } from '../store/authSlice'
 
-const dispatch = useDispatch();
-
-useEffect(() => {
-  const token = localStorage.getItem("token");
-  dispatch(setToken(token))
-}, [])
-
+const AppInitializer: React.FC = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    dispatch(setToken(token));
+  }, []);
+  return null;
+};
 const App: React.FC = () => {
   const router = createBrowserRouter([
     {
@@ -61,6 +62,7 @@ const App: React.FC = () => {
     <>
       <Provider store={store}>
         <QueryClientProvider client={queryClient}>
+          <AppInitializer />
           <RouterProvider router={router} />
         </QueryClientProvider>
       </Provider>
